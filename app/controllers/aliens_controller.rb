@@ -1,4 +1,5 @@
 class AliensController < ApplicationController
+
     def index
         aliens = Alien.all 
         render json: aliens 
@@ -18,10 +19,24 @@ class AliensController < ApplicationController
     end
   
     def update
+        alien = Alien.find(params[:id])
+        alien.update(alien_params)
+        if alien.valid? 
+            render json :alien 
+        else
+            render json alien.errors
+        end
     end
   
     def destroy
+        alien = Alien.find(params[:id])
+        if alien.destroy
+            render json :alien 
+        else 
+            render json :errors
+        end
     end
+    
   
   end
 

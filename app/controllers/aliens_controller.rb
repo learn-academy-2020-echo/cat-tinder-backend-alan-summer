@@ -10,8 +10,9 @@ class AliensController < ApplicationController
         if alien.valid? 
         render json: alien
         else
-            render json: alien.errors, status: :unprocessable_entity
+            render json: alien.errors, status: 422
     end
+end
 
     def update
         alien = Alien.find(params[:id])
@@ -19,7 +20,7 @@ class AliensController < ApplicationController
         if alien.valid? 
             render json: alien 
         else
-            render json: errors
+            render json: alien.errors, status: 422
         end
     end
   
@@ -28,12 +29,11 @@ class AliensController < ApplicationController
         if alien.destroy
             render json: alien 
         else 
-            render json: errors
+            render json: alien.errors, status: 422
         end
     end
 
 
-    end
     private
     def alien_params
         params.require(:alien).permit(:name, :distance, :planet, :img)

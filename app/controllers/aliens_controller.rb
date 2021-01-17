@@ -19,7 +19,7 @@ class AliensController < ApplicationController
         if alien.valid? 
             render json: alien 
         else
-            render json alien.errors
+            render json: errors
         end
     end
   
@@ -28,7 +28,7 @@ class AliensController < ApplicationController
         if alien.destroy
             render json: alien 
         else 
-            render json: alien.errors
+            render json: errors
         end
     end
 
